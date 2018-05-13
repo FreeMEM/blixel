@@ -3,7 +3,7 @@
 CFLAGS = -noixemul -g -Wall
 CC = m68k-amigaos-gcc
 
-OBJS = blixel.o screen.o
+OBJS = blixel.o screen.o mainmenu.o
 BINARY = blixel
 
 all: blixel
