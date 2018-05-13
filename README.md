@@ -1,6 +1,13 @@
 # blixel
 
 
-Blixel want to be a sprite editor for Amiga. I don't know how many time I will need to complete this software but it's my project to learn C correctly and my way to develop software to the epic Amiga Computers!
+ BliXel
+ ------
+ A simple software to design Blitter Objects for Amiga
+ This projects is only a little program to understand how to works Amiga Rom Kernel Libraries, how to make Amiga software and 
+ learn C better.
+ License: GPL v.3 (Leaser Gnu Public License)
+
+
 Amiga Forever!
 
