@@ -26,7 +26,9 @@ void screen() {
     struct IntuiMessage *msg = NULL;
     ULONG modeID;
 
-
+    // struct DisplayInfo displayinfo;
+    // struct MonitorInfo monitorinfo;
+    // struct DimensionInfo dimensioninfo;
     struct NameInfo nameinfo;
     struct DrawInfo *drawinfo;
 
