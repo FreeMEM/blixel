@@ -2,10 +2,23 @@
 #include <intuition/intuition.h>
 #include <intuition/screens.h>
 #include <graphics/gfxbase.h>
+#include <string.h>
+
 
 #include <pragmas/exec_pragmas.h>
 #include <pragmas/intuition_pragmas.h>
 #include <pragmas/graphics_pragmas.h>
+
+
+#include "includes/mainmenu.h"
+
+
+/* We only use a single menu, but the code is generalizable to */
+/* more than one menu.                                         */
+
+
+
+
 
 struct IntuitionBase *IntuitionBase = NULL;
 struct GfxBase *GfxBase = NULL;
@@ -17,13 +30,14 @@ struct EasyStruct failedES = {
     "OK",
 };
 
-
 void screen() {
     struct Screen *wbscreen = NULL;
     struct Screen *clonescreen = NULL;
     struct Window *window = NULL;
     struct ViewPort *vp = NULL;
     struct IntuiMessage *msg = NULL;
+    
+    UWORD left, m;
     ULONG modeID;
 
     // struct DisplayInfo displayinfo;
@@ -33,6 +47,9 @@ void screen() {
     struct DrawInfo *drawinfo;
 
     ULONG result;
+
+
+    
 
     /* Fails silently when not V37 */
     IntuitionBase = (struct IntuitionBase *)OpenLibrary("intuition.library",37L);
@@ -51,19 +68,7 @@ void screen() {
                  * Workbench screen. */
                 if ((modeID = GetVPModeID(vp)) != INVALID_ID) {
 
-                    // result = GetDisplayInfoData(NULL,
-                    //                             (UBYTE *)&monitorinfo,
-                    //                             sizeof(struct MonitorInfo),
-                    //                             DTAG_MNTR, modeID);
-                    // result = GetDisplayInfoData(NULL,
-                    //                             (UBYTE *)&displayinfo,
-                    //                             sizeof(struct DisplayInfo),
-                    //                             DTAG_DISP, modeID);
-                    // result = GetDisplayInfoData(NULL,
-                    //                             (UBYTE *)&dimensioninfo,
-                    //                             sizeof(struct DimensionInfo),
-                    //                             DTAG_DIMS,
-                    //                             modeID);
+
                     result = GetDisplayInfoData(NULL,
                                                 (UBYTE *)&nameinfo,
                                                 sizeof(struct NameInfo),
@@ -87,23 +92,38 @@ void screen() {
                         SA_AutoScroll, TRUE,
                         TAG_DONE))) {
 
-                        if (NULL != (window = OpenWindowTags(NULL,
-                            WA_Top, clonescreen->BarHeight + 1,
-                            WA_Height, clonescreen->Height
-                                                - (clonescreen->BarHeight + 1),
-                            WA_CustomScreen, clonescreen,
-                            WA_MinWidth, 320,
-                            WA_MinHeight, 100,
-                            WA_MaxWidth, clonescreen->Width,
-                            WA_MaxHeight, clonescreen->Height,
+                        if (NULL != (window = OpenWindowTags( 
+																NULL,
+																WA_Top, clonescreen->BarHeight + 1,
+																WA_Height, clonescreen->Height - (clonescreen->BarHeight + 1),
+																WA_CustomScreen, clonescreen,
+																WA_MinWidth, 320,
+																WA_MinHeight, 100,
+																WA_MaxWidth, clonescreen->Width,
+																WA_MaxHeight, clonescreen->Height,
 
-                            /* I'm only interested in CLOSEWINDOW messages */
-                            WA_IDCMP, CLOSEWINDOW,
-                            WA_Flags, WINDOWSIZING|WINDOWDRAG|
-                                           WINDOWDEPTH|WINDOWCLOSE|ACTIVATE,
-                            WA_Title, "Close to exit.",
-                            TAG_DONE))) {
-
+																/* I'm only interested in CLOSEWINDOW messages */
+																WA_IDCMP, CLOSEWINDOW,
+																WA_Flags, WINDOWSIZING|WINDOWDRAG|
+																			WINDOWDEPTH|WINDOWCLOSE|ACTIVATE,
+																WA_Title, "Close to exit.",
+																TAG_DONE ))) {                       
+/*
+                            left = 2;
+                            for (m = 0; m < NUM_MENUS; m++) {
+                                menustrip[m].LeftEdge = left;
+                                menustrip[m].MenuName = menutitle[m];
+                                menustrip[m].Width = TextLength(&window->WScreen->RastPort,
+                                								menutitle[m], 
+																(int) strlen(menutitle[m])) + 8;
+                                left += menustrip[m].Width;
+                                
+                            }
+                            if (SetMenuStrip(window, menustrip)) {
+                                handleWindow(window, menustrip);
+                                ClearMenuStrip(window);
+                            }
+*/
                             /* Wait for the closewindow message */
                             WaitPort(window->UserPort);
                             /* And remove message from the port */
@@ -126,4 +146,6 @@ void screen() {
         }
         CloseLibrary((struct Library *)IntuitionBase);
     }
+
+
 }

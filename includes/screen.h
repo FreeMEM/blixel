@@ -1,6 +1,7 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
 void screen();
 
 #endif
+

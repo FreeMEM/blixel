@@ -8,12 +8,11 @@
 #define INTUI_V36_NAMES_ONLY
 #define INTUITION_REV 37
 #include "includes/screen.h"
-// #include "mainmenu.h"
-/* prototypes declaration */
+
+
 
 int main(void) {
 
-    screen();
-    
+    screen();    
     
 }
