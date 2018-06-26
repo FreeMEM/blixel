@@ -16,10 +16,6 @@
 /* We only use a single menu, but the code is generalizable to */
 /* more than one menu.                                         */
 
-
-
-
-
 struct IntuitionBase *IntuitionBase = NULL;
 struct GfxBase *GfxBase = NULL;
 // extern struct Library *SysBase;
@@ -108,7 +104,7 @@ void screen() {
 																			WINDOWDEPTH|WINDOWCLOSE|ACTIVATE,
 																WA_Title, "Close to exit.",
 																TAG_DONE ))) {                       
-/*
+
                             left = 2;
                             for (m = 0; m < NUM_MENUS; m++) {
                                 menustrip[m].LeftEdge = left;
@@ -123,7 +119,7 @@ void screen() {
                                 handleWindow(window, menustrip);
                                 ClearMenuStrip(window);
                             }
-*/
+
                             /* Wait for the closewindow message */
                             WaitPort(window->UserPort);
                             /* And remove message from the port */

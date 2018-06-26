@@ -8,21 +8,14 @@
 #include <clib/exec_protos.h>
 #include <clib/graphics_protos.h>
 #include <clib/intuition_protos.h>
-/*  These values are based on the ROM font Topaz8. Adjust these  */
-/*  values to correctly handle the screen's current font.        */
-#define MENWIDTH  (56+8)  /* Longest menu item name * font width */
-                          /* + 8 pixels for trim                 */
-#define MENHEIGHT (10)    /* Font height + 2 pixels              */
-/* We only use a single menu, but the code is generalizable to */
-/* more than one menu.                                         */
-#define NUM_MENUS 1
+
 
 
 
 
 struct Library *GfxBase;
 struct Library *IntuitionBase;
-STRPTR menutitle[NUM_MENUS] =  {   "Project"   };
+
 
 /* To keep this example simple, we'll hard-code the font used for menu */
 /* items.  Algorithmic layout can be used to handle arbitrary fonts.   */
