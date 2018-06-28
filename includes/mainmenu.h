@@ -14,6 +14,9 @@
 /* more than one menu.                                         */
 
 #define NUM_MENUS 1
+
+VOID handleWindow (struct Window *win, struct Menu *menuStrip);
+
 STRPTR menutitle[NUM_MENUS] =  {   "Project"   };
 /* To keep this example simple, we'll hard-code the font used for menu */
 /* items.  Algorithmic layout can be used to handle arbitrary fonts.   */
@@ -104,7 +107,7 @@ WFLG_DRAGBAR | WFLG_ACTIVATE | WFLG_CLOSEGADGET, NULL,NULL,
 */
 
 /* our function prototypes */
-VOID handleWindow(struct Window *win, struct Menu *menuStrip);
+
 
 #endif
 

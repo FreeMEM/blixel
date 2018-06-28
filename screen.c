@@ -83,7 +83,7 @@ void screen() {
                         /*Workbench always sizes up to OSCAN_TEXT, so do we */
                         SA_Overscan, OSCAN_TEXT,
                         SA_Pens, drawinfo->dri_Pens,
-                        SA_Title, nameinfo.Name,
+                        SA_Title, "Blixel",
                         /* Doesn't hurt for screens which don't scroll */
                         SA_AutoScroll, TRUE,
                         TAG_DONE))) {

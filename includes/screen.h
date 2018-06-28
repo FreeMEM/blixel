@@ -2,6 +2,5 @@
 #define SCREEN_H
 
 void screen();
-
 #endif
 
