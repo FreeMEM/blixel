@@ -4,10 +4,9 @@
 #include <graphics/gfxbase.h>
 #include <string.h>
 
-
-#include <pragmas/exec_pragmas.h>
-#include <pragmas/intuition_pragmas.h>
-#include <pragmas/graphics_pragmas.h>
+#include <clib/exec_protos.h>
+#include <clib/graphics_protos.h>
+#include <clib/intuition_protos.h>
 
 
 #include "includes/mainmenu.h"
@@ -64,7 +63,6 @@ void screen() {
                  * Workbench screen. */
                 if ((modeID = GetVPModeID(vp)) != INVALID_ID) {
 
-
                     result = GetDisplayInfoData(NULL,
                                                 (UBYTE *)&nameinfo,
                                                 sizeof(struct NameInfo),
@@ -91,12 +89,14 @@ void screen() {
                         if (NULL != (window = OpenWindowTags( 
 																NULL,
 																WA_Top, clonescreen->BarHeight + 1,
-																WA_Height, clonescreen->Height - (clonescreen->BarHeight + 1),
+																// WA_Height, clonescreen->Height - (clonescreen->BarHeight + 1),
+                                                                WA_Height,
+                                                                200,
 																WA_CustomScreen, clonescreen,
 																WA_MinWidth, 320,
 																WA_MinHeight, 100,
-																WA_MaxWidth, clonescreen->Width,
-																WA_MaxHeight, clonescreen->Height,
+																WA_MaxWidth, 320,//clonescreen->Width,
+																WA_MaxHeight, 200,//clonescreen->Height,
 
 																/* I'm only interested in CLOSEWINDOW messages */
 																WA_IDCMP, CLOSEWINDOW,
@@ -116,7 +116,7 @@ void screen() {
                                 
                             }
                             if (SetMenuStrip(window, menustrip)) {
-                                handleWindow(window, menustrip);
+                                handleMenu(window, menustrip);
                                 ClearMenuStrip(window);
                             }
 

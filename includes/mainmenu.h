@@ -15,7 +15,7 @@
 
 #define NUM_MENUS 1
 
-VOID handleWindow (struct Window *win, struct Menu *menuStrip);
+VOID handleMenu (struct Window *win, struct Menu *menuStrip);
 
 STRPTR menutitle[NUM_MENUS] =  {   "Project"   };
 /* To keep this example simple, we'll hard-code the font used for menu */
@@ -96,18 +96,6 @@ struct Menu menustrip[NUM_MENUS] =
     &menu1[0]                /* First item         */
     }
 };
-
-/*
-struct NewWindow mynewWindow =
-{
-40,40, 300,100, 0,1, IDCMP_CLOSEWINDOW | IDCMP_MENUPICK,
-WFLG_DRAGBAR | WFLG_ACTIVATE | WFLG_CLOSEGADGET, NULL,NULL,
-"Menu Test Window", NULL,NULL,0,0,0,0,WBENCHSCREEN
-};
-*/
-
-/* our function prototypes */
-
 
 #endif
 

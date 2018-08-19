@@ -10,9 +10,6 @@
 #include <clib/intuition_protos.h>
 
 
-
-
-
 struct Library *GfxBase;
 struct Library *IntuitionBase;
 
@@ -27,7 +24,7 @@ struct Library *IntuitionBase;
 /*
 **   Wait for the user to select the close gadget.
 */
-VOID handleWindow(struct Window *win, struct Menu *menuStrip) {
+VOID handleMenu(struct Window *win, struct Menu *menuStrip) {
     struct IntuiMessage *msg;
     SHORT done;
     ULONG class;
@@ -68,8 +65,8 @@ VOID handleWindow(struct Window *win, struct Menu *menuStrip) {
                         ** like NOMENU, NOITEM and NOSUB.  An application should
                         ** check for these cases.
                         */
-                        printf("IDCMP_MENUPICK: menu %d, item %d, sub %d\n",
-                            menuNum, itemNum, subNum);
+                        // printf("IDCMP_MENUPICK: menu %d, item %d, sub %d\n",
+                        //     menuNum, itemNum, subNum);
 
                         /* This one is the quit menu selection...
                         ** stop if we get it, and don't process any more.
