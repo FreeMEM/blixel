@@ -9,15 +9,16 @@
 #include <clib/intuition_protos.h>
 
 
-#include "includes/mainmenu.h"
+
+// #include "includes/mainworkarea.h"
+// #include "includes/toolbox.h"
+// #include "includes/framearea.h"
+// #include "includes/frameedition.h"
+#include "includes/screen.h"
 
 
 /* We only use a single menu, but the code is generalizable to */
 /* more than one menu.                                         */
-
-struct IntuitionBase *IntuitionBase = NULL;
-struct GfxBase *GfxBase = NULL;
-// extern struct Library *SysBase;
 
 struct EasyStruct failedES = {
     sizeof(struct EasyStruct), 0, "CWB",
@@ -25,24 +26,21 @@ struct EasyStruct failedES = {
     "OK",
 };
 
-void screen() {
+
+
+
+void createScreen() {
+    struct IntuitionBase *IntuitionBase = NULL;
+    struct GfxBase *GfxBase = NULL;
     struct Screen *wbscreen = NULL;
     struct Screen *clonescreen = NULL;
-    struct Window *window = NULL;
     struct ViewPort *vp = NULL;
-    struct IntuiMessage *msg = NULL;
-    
-    UWORD left, m;
-    ULONG modeID;
 
-    // struct DisplayInfo displayinfo;
-    // struct MonitorInfo monitorinfo;
-    // struct DimensionInfo dimensioninfo;
+    ULONG modeID;
     struct NameInfo nameinfo;
     struct DrawInfo *drawinfo;
 
     ULONG result;
-
 
     
 
@@ -85,52 +83,7 @@ void screen() {
                         /* Doesn't hurt for screens which don't scroll */
                         SA_AutoScroll, TRUE,
                         TAG_DONE))) {
-
-                        if (NULL != (window = OpenWindowTags( 
-																NULL,
-																WA_Top, clonescreen->BarHeight + 1,
-																// WA_Height, clonescreen->Height - (clonescreen->BarHeight + 1),
-                                                                WA_Height,
-                                                                200,
-																WA_CustomScreen, clonescreen,
-																WA_MinWidth, 320,
-																WA_MinHeight, 100,
-																WA_MaxWidth, 320,//clonescreen->Width,
-																WA_MaxHeight, 200,//clonescreen->Height,
-
-																/* I'm only interested in CLOSEWINDOW messages */
-																WA_IDCMP, CLOSEWINDOW,
-																WA_Flags, WINDOWSIZING|WINDOWDRAG|
-																			WINDOWDEPTH|WINDOWCLOSE|ACTIVATE,
-																WA_Title, "Close to exit.",
-																TAG_DONE ))) {                       
-
-                            left = 2;
-                            for (m = 0; m < NUM_MENUS; m++) {
-                                menustrip[m].LeftEdge = left;
-                                menustrip[m].MenuName = menutitle[m];
-                                menustrip[m].Width = TextLength(&window->WScreen->RastPort,
-                                								menutitle[m], 
-																(int) strlen(menutitle[m])) + 8;
-                                left += menustrip[m].Width;
-                                
-                            }
-                            if (SetMenuStrip(window, menustrip)) {
-                                handleMenu(window, menustrip);
-                                ClearMenuStrip(window);
-                            }
-
-                            /* Wait for the closewindow message */
-                            WaitPort(window->UserPort);
-                            /* And remove message from the port */
-                            while(NULL != (msg = (struct IntuiMessage *)GetMsg(window->UserPort))) {
-                                ReplyMsg((struct Message *)msg);
-                            }
-                            CloseWindow(window);
-                        } else 
-                            EasyRequest(NULL, &failedES, NULL,"Can't open window");
-                        CloseScreen(clonescreen);
-                    } else
+                        } else
                         EasyRequest(NULL, &failedES, NULL,"Can't open screen");
                 } else
                     EasyRequest(NULL, &failedES, NULL, "Invalide ModeID");
@@ -142,6 +95,16 @@ void screen() {
         }
         CloseLibrary((struct Library *)IntuitionBase);
     }
+
+}
+
+void screen() {
+
+    //crear la screen
+    createScreen();
+    //llamar a las distintos windows
+
+
 
 
 }
