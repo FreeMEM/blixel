@@ -4,7 +4,7 @@ CFLAGS = -noixemul -g -Wall
 CC = m68k-amigaos-gcc
 INCLUDES= includes/
 
-OBJS = blixel.o screen.o mainmenu.o
+OBJS = blixel.o screen.o mainmenu.o mainworkarea.o
 # OBJS = blixel.o screen.o mainmenu.o mainworkarea.o
 BINARY = blixel
 

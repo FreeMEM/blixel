@@ -9,12 +9,14 @@
 #include <clib/intuition_protos.h>
 
 
+#include "includes/screen.h"
+#include "includes/mainworkarea.h"
+#include "includes/mainmenu.h"
 
-// #include "includes/mainworkarea.h"
 // #include "includes/toolbox.h"
 // #include "includes/framearea.h"
 // #include "includes/frameedition.h"
-#include "includes/screen.h"
+
 
 
 /* We only use a single menu, but the code is generalizable to */
@@ -22,11 +24,9 @@
 
 struct EasyStruct failedES = {
     sizeof(struct EasyStruct), 0, "CWB",
-    "%s",
+    "ya ves",
     "OK",
 };
-
-
 
 
 void createScreen() {
@@ -41,8 +41,6 @@ void createScreen() {
     struct DrawInfo *drawinfo;
 
     ULONG result;
-
-    
 
     /* Fails silently when not V37 */
     IntuitionBase = (struct IntuitionBase *)OpenLibrary("intuition.library",37L);
@@ -83,6 +81,12 @@ void createScreen() {
                         /* Doesn't hurt for screens which don't scroll */
                         SA_AutoScroll, TRUE,
                         TAG_DONE))) {
+
+                            //call to different screens.
+                            // print("Hola");
+                            /*mainworkarea(clonescreen);*/
+
+
                         } else
                         EasyRequest(NULL, &failedES, NULL,"Can't open screen");
                 } else
@@ -95,16 +99,5 @@ void createScreen() {
         }
         CloseLibrary((struct Library *)IntuitionBase);
     }
-
-}
-
-void screen() {
-
-    //crear la screen
-    createScreen();
-    //llamar a las distintos windows
-
-
-
 
 }

@@ -1,8 +1,11 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+
 // extern struct Library *SysBase;
-void screen();
+
+void createScreen();
+
 
 #endif
 
