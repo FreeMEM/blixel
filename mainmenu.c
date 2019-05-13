@@ -9,6 +9,7 @@
 #include <clib/graphics_protos.h>
 #include <clib/intuition_protos.h>
 
+
 /*  These values are based on the ROM font Topaz8. Adjust these  */
 /*  values to correctly handle the screen's current font.        */
 #define MENWIDTH  (56+8)  /* Longest menu item name * font width */

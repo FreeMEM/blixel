@@ -12,12 +12,12 @@
 #include "includes/screen.h"
 #include "includes/mainworkarea.h"
 #include "includes/mainmenu.h"
-
+#include <stdio.h>
 // #include "includes/toolbox.h"
 // #include "includes/framearea.h"
 // #include "includes/frameedition.h"
 
-
+#define INTUITION_REV 37
 
 /* We only use a single menu, but the code is generalizable to */
 /* more than one menu.                                         */
@@ -35,6 +35,7 @@ void createScreen() {
     struct Screen *wbscreen = NULL;
     struct Screen *clonescreen = NULL;
     struct ViewPort *vp = NULL;
+    struct Window *win = NULL;
 
     ULONG modeID;
     struct NameInfo nameinfo;
@@ -43,9 +44,10 @@ void createScreen() {
     ULONG result;
 
     /* Fails silently when not V37 */
-    IntuitionBase = (struct IntuitionBase *)OpenLibrary("intuition.library",37L);
-    GfxBase = (struct GfxBase *)OpenLibrary("graphics.library",37L);
+    IntuitionBase = (struct IntuitionBase *)OpenLibrary("intuition.library",INTUITION_REV);
+    GfxBase = (struct GfxBase *)OpenLibrary("graphics.library",INTUITION_REV);
     wbscreen = LockPubScreen("Workbench");
+    
 
     if ( IntuitionBase != NULL ) {
         if ( GfxBase != NULL ) {
@@ -83,12 +85,14 @@ void createScreen() {
                         TAG_DONE))) {
 
                             //call to different screens.
-                            // print("Hola");
-                            /*mainworkarea(clonescreen);*/
+
+                          
+                            mainWorkarea(clonescreen);
 
 
-                        } else
-                        EasyRequest(NULL, &failedES, NULL,"Can't open screen");
+                        } else {
+                            EasyRequest(NULL, &failedES, NULL,"Can't open screen");
+                        }
                 } else
                     EasyRequest(NULL, &failedES, NULL, "Invalide ModeID");
                 FreeScreenDrawInfo(wbscreen, drawinfo);
